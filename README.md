@@ -77,17 +77,19 @@ app.listen(3000, () => console.log('Server on port 3000'));
 4. Create a public folder with index.html:
 ```html
 <!DOCTYPE html>
-<html><body>
-<video id="video" autoplay style="width: 100%;"></video>
-<button onclick="sendCommand('takeoff')">Takeoff</button>
-<script>
-const video = document.getElementById('video');
-const peer = new RTCPeerConnection();
-fetch('http://localhost:8000/offer').then(res => res.json()).then(offer => peer.setRemoteDescription(offer)).then(() => peer.createAnswer()).then(answer => peer.setLocalDescription(answer)).then(() => fetch('http://localhost:8000/answer', { method: 'POST', body: JSON.stringify(peer.localDescription) }));
-peer.ontrack = e => video.srcObject = e.streams[0];
-function sendCommand(cmd) { fetch(`http://localhost:3000/${cmd}`); }
-</script>
-</body></html>
+<html>
+<body>
+  <video id="video" autoplay style="width: 100%;"></video>
+  <button onclick="sendCommand('takeoff')">Takeoff</button>
+  <script>
+    const video = document.getElementById('video');
+    const peer = new RTCPeerConnection();
+    fetch('http://localhost:8000/offer').then(res => res.json()).then(offer => peer.setRemoteDescription(offer)).then(() => peer.createAnswer()).then(answer => peer.setLocalDescription(answer)).then(() => fetch('http://localhost:8000/answer', { method: 'POST', body: JSON.stringify(peer.localDescription) }));
+    peer.ontrack = e => video.srcObject = e.streams[0];
+    function sendCommand(cmd) { fetch(`http://localhost:3000/${cmd}`); }
+  </script>
+</body>
+</html>
 ```
 5. Run the server: node server.js
 6. Tunnel the web app with Ngrok (in a second terminal): ./ngrok http 3000
