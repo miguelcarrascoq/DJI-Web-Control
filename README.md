@@ -38,18 +38,18 @@ This project enables remote control of a DJI Mini 3 Pro over the internet using 
 
 ### 2. Install Tools on the Local Computer
 1. Install ADB:
-   - Linux: sudo apt install adb
+   - Linux: `sudo apt install adb`
    - Windows/Mac: Download from Android SDK or via scrcpy installer.
 2. Install scrcpy:
-   - Linux: sudo apt install scrcpy
+   - Linux: `sudo apt install scrcpy`
    - Windows/Mac: Download from https://github.com/Genymobile/scrcpy/releases.
 3. Install webrtc-streamer:
-   - Docker (easiest): docker run -p 8000:8000 mpromonet/webrtc-streamer
-   - Or build from source: Clone https://github.com/mpromonet/webrtc-streamer, run npm install && npm start.
+   - Docker (easiest): `docker run -p 8000:8000 mpromonet/webrtc-streamer`
+   - Or build from source: Clone https://github.com/mpromonet/webrtc-streamer, run `npm install && npm start`.
 4. Install Ngrok:
-   - Download from https://ngrok.com/download, unzip, and authenticate: ./ngrok authtoken <your-token>.
+   - Download from https://ngrok.com/download, unzip, and authenticate: `./ngrok authtoken <your-token>`.
 5. Install Node.js:
-   - Linux: sudo apt install nodejs npm
+   - Linux: `sudo apt install nodejs npm`
    - Windows/Mac: Download from https://nodejs.org/.
 
 ### 3. Mirror the Smartphone Locally
@@ -58,13 +58,13 @@ This project enables remote control of a DJI Mini 3 Pro over the internet using 
 3. The DJI Fly app should appear on the local computer’s screen. Test by clicking the Takeoff button.
 
 ### 4. Stream Over the Internet
-1. Start webrtc-streamer to capture the screen: webrtc-streamer -u "screen://0" -w 8000
+1. Start webrtc-streamer to capture the screen: `webrtc-streamer -u "screen://0" -w 8000`
    - Adjust "screen://0" if using multiple displays.
-2. Expose the stream with Ngrok: ./ngrok http 8000
+2. Expose the stream with Ngrok: `./ngrok http 8000`
    - Copy the public URL (e.g., https://abc123.ngrok.io).
 
 ### 5. Set Up the Web Control Interface
-1. Create a project folder: mkdir drone-control && cd drone-control; npm init -y; npm install express robotjs
+1. Create a project folder: `mkdir drone-control && cd drone-control; npm init -y; npm install express robotjs`
 2. Add the server code (save as server.js):
 ```js
 const express = require('express');
@@ -91,8 +91,8 @@ app.listen(3000, () => console.log('Server on port 3000'));
 </body>
 </html>
 ```
-5. Run the server: node server.js
-6. Tunnel the web app with Ngrok (in a second terminal): ./ngrok http 3000
+5. Run the server: `node server.js`
+6. Tunnel the web app with Ngrok (in a second terminal): `./ngrok http 3000`
 
 ### 6. Control Remotely
 1. On your remote device, open a browser.
